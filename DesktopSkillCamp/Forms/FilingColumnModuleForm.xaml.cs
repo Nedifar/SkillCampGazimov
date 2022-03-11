@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -127,7 +128,7 @@ namespace DesktopSkillCamp.Forms
                             {
                                 price = double.Parse(tbLitr.Text) * carFillSel.Price;
                             }
-                            else if(cbMode.SelectedIndex == 1)
+                            else if (cbMode.SelectedIndex == 1)
                             {
                                 price = double.Parse(tbPrice.Text);
                                 tbLitr.Text = (price / carFillSel.Price).ToString();
@@ -144,7 +145,7 @@ namespace DesktopSkillCamp.Forms
                             };
                             var response4 = await http.PostAsync("http://localhost:60424/api/stations/pay", pay, new JsonMediaTypeFormatter());
                             response4.EnsureSuccessStatusCode();
-                            if(response4.Content.ReadAsStringAsync().Result.Contains("Одобрено"))
+                            if (response4.Content.ReadAsStringAsync().Result.Contains("Одобрено"))
                             {
                                 Models.Purchase purchase = new Models.Purchase
                                 {
@@ -194,9 +195,22 @@ namespace DesktopSkillCamp.Forms
             }
         }
 
-        private void clZapravit(object sender, RoutedEventArgs e)
+        private async void clZapravit(object sender, RoutedEventArgs e)
         {
-
+            await Task.Run(() =>
+            {
+                for (int i = 1; i <= 100; i++)
+                {
+                    this.Dispatcher.Invoke(new Action(() =>
+                    {
+                        progress.Value = i;
+                    }));
+                    Thread.Sleep(200);
+                }
+            });
+            MessageBox.Show("Заправка завершена.");
+            Close();
         }
     }
 }
+
