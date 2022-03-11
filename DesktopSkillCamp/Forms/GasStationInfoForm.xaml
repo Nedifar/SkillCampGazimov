@@ -1,0 +1,51 @@
+﻿<Window x:Class="DesktopSkillCamp.Forms.GasStationInfoForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopSkillCamp.Forms"
+        mc:Ignorable="d"
+        Title="GasStationInfoForm" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontSize="20" x:Name="mainText"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="Адрес: " Margin="0 0 5 0"/>
+                <TextBox Text="{Binding Address}" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="Цена АИ-92: " Margin="0 0 5 0"/>
+                <TextBox x:Name="price92" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="Остаток АИ-92: " Margin="0 0 5 0"/>
+                <TextBox x:Name="ostalos92" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="Цена АИ-95: " Margin="0 0 5 0"/>
+                <TextBox x:Name="price95" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="Остаток АИ-95: " Margin="0 0 5 0"/>
+                <TextBox x:Name="ostalos95" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="Цена АИ-98: " Margin="0 0 5 0"/>
+                <TextBox x:Name="price98" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="Остаток АИ-98: " Margin="0 0 5 0"/>
+                <TextBox x:Name="ostalos98" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="Цена ДТ: " Margin="0 0 5 0"/>
+                <TextBox x:Name="priceDT" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="Остаток ДТ: " Margin="0 0 5 0"/>
+                <TextBox x:Name="ostalosDT" Width="120"/>
+            </StackPanel>
+            <Button Content="Сохранить" Click="clSave"/>
+        </StackPanel>
+    </Grid>
+</Window>
