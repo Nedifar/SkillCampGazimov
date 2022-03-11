@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,9 +36,19 @@ namespace DesktopSkillCamp.Forms
             }
         }
 
-        private void clAccept(object sender, RoutedEventArgs e)
+        private async void clAccept(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                Models.CameraLoad numberObject = null;
+                using (var http = new HttpClient())
+                {
+                    var response = await http.PostAsync("", numberObject, new JsonMediaTypeFormatter());
+                    response.EnsureSuccessStatusCode();
+                    MessageBox.Show("Успешно");
+                }
+            }
+            catch { }
         }
     }
 }
