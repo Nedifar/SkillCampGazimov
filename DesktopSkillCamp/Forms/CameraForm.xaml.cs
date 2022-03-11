@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,16 @@ namespace DesktopSkillCamp.Forms
 
         private void clSelectPhoto(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            if(fileDialog.ShowDialog() == true)
+            {
+                img.Source = new BitmapImage(new Uri(fileDialog.FileName));
+            }
+        }
 
+        private void clAccept(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

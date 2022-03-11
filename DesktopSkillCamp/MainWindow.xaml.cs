@@ -50,6 +50,8 @@ namespace DesktopSkillCamp
 
         private void clCamera(object sender, RoutedEventArgs e)
         {
+            Forms.CameraForm cameraForm = new Forms.CameraForm();
+            cameraForm.Show();
 
         }
     }

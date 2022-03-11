@@ -29,7 +29,7 @@ namespace DesktopSkillCamp.Forms
 
         private void clBegin(object sender, RoutedEventArgs e)
         {
-            if()
+            //if()
         }
 
         private void clPayment(object sender, RoutedEventArgs e)

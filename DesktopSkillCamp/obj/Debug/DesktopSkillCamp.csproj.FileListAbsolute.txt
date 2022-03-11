@@ -20,3 +20,7 @@ C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\DesktopS
 C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\DesktopSkillCamp.csproj.CopyComplete
 C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\DesktopSkillCamp.exe
 C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\DesktopSkillCamp.pdb
+C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\Forms\CameraForm.g.cs
+C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\Forms\FilingColumnModuleForm.g.cs
+C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\Forms\CameraForm.baml
+C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\Forms\FilingColumnModuleForm.baml

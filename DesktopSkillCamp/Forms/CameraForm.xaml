@@ -14,6 +14,7 @@
                 <TextBox x:Name="number"/>
                 <Image Width="200" Height="200" x:Name="img"/>
                 <Button Content="Выбрать фото" Click="clSelectPhoto"/>
+                <Button Content="Подтвердить" Click="clAccept"/>
             </StackPanel>
         </StackPanel>
     </Grid>
