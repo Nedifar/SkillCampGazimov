@@ -40,5 +40,17 @@ namespace DesktopSkillCamp
             else
                 MessageBox.Show("Error");
         }
+
+        private void clZapravka(object sender, RoutedEventArgs e)
+        {
+            Forms.FilingColumnModuleForm filing = new Forms.FilingColumnModuleForm();
+            filing.Show();
+
+        }
+
+        private void clCamera(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

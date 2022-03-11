@@ -1,0 +1,35 @@
+﻿<Window x:Class="DesktopSkillCamp.Forms.FilingColumnModuleForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopSkillCamp.Forms"
+        mc:Ignorable="d"
+        Title="FilingColumnModuleForm" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontSize="20" x:Name="mainText"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                <TextBlock Text="ID АЗС " Margin="0 0 5 0"/>
+                <TextBox x:Name="tbAZS" Width="120"/>
+            </StackPanel>
+            <StackPanel x:Name="spZapravka">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                    <TextBlock Text="Виды топлива " Margin="0 0 5 0"/>
+                    <ComboBox x:Name="cbViewT" Width="120"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                    <TextBlock Text="Режим заправки " Margin="0 0 5 0"/>
+                    <ComboBox x:Name="cbMode" Width="120"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                    <TextBlock Text="Способ оплаты " Margin="0 0 5 0"/>
+                    <ComboBox x:Name="cbPayment" Width="120"/>
+                </StackPanel>
+                <Button Content="Оплатить" Click="clPayment"/>
+            </StackPanel>
+            <StackPanel/>
+            <Button Content="Начать работу" Click="clBegin"/>
+        </StackPanel>
+    </Grid>
+</Window>

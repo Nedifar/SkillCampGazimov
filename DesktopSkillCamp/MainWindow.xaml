@@ -13,6 +13,8 @@
                 <TextBox x:Name="tbId" Width="140"/>
             </StackPanel>
             <Button Content="Загрузить данные" Click="clLoadData"/>
+            <Button Content="Заправка" Click="clZapravka"/>
+            <Button Content="Терминал" Click="clCamera"/>
         </StackPanel>
     </Grid>
 </Window>
