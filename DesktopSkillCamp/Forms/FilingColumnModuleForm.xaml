@@ -15,16 +15,38 @@
             </StackPanel>
             <StackPanel x:Name="spZapravka">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                    <TextBlock Text="Имя фамилие " Margin="0 0 5 0"/>
+                    <TextBox x:Name="tbName" Width="120"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
                     <TextBlock Text="Виды топлива " Margin="0 0 5 0"/>
-                    <ComboBox x:Name="cbViewT" Width="120"/>
+                    <ComboBox x:Name="cbViewT" DisplayMemberPath="Name" Width="120"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
                     <TextBlock Text="Режим заправки " Margin="0 0 5 0"/>
-                    <ComboBox x:Name="cbMode" Width="120"/>
+                    <ComboBox x:Name="cbMode" SelectionChanged="cbMode_SelectionChanged" Width="120"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" x:Name="spPrice" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0 5">
+                    <TextBlock Text="Заправка по цене " Margin="0 0 5 0"/>
+                    <TextBox x:Name="tbPrice" Width="120"/>
+                </StackPanel>
+                <StackPanel x:Name="spC" Orientation="Horizontal" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0 5">
+                    <TextBlock Text="Заправка по объему " Margin="0 0 5 0"/>
+                    <TextBox x:Name="tbLitr" Width="120"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
                     <TextBlock Text="Способ оплаты " Margin="0 0 5 0"/>
-                    <ComboBox x:Name="cbPayment" Width="120"/>
+                    <ComboBox x:Name="cbPayment" SelectionChanged="selChang" Width="120"/>
+                </StackPanel>
+                <StackPanel x:Name="spPoKarte" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                        <TextBlock Text="Номер карты " Margin="0 0 5 0"/>
+                        <TextBox x:Name="tbNumberCard" Width="120"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
+                        <TextBlock Text="Держатель карты " Margin="0 0 5 0"/>
+                        <TextBox x:Name="tbPerson" Width="120"/>
+                    </StackPanel>
                 </StackPanel>
                 <Button Content="Оплатить" Click="clPayment"/>
             </StackPanel>

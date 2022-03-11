@@ -24,6 +24,8 @@ namespace DesktopSkillCamp
         public MainWindow()
         {
             InitializeComponent();
+            Random rnd = new Random();
+            Models.Session.sessionKey = rnd.Next(100000, 999999).ToString() + rnd.Next(100000, 999999).ToString();
         }
 
         private async void clLoadData(object sender, RoutedEventArgs e)

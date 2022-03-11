@@ -9,6 +9,6 @@ namespace DesktopSkillCamp.Models
     {
         public int iLoyaltyCard { get; set; }
         public string CardHolder { get; set; }
-        public int Balance { get; set; }
+        public double Balance { get; set; }
     }
 }

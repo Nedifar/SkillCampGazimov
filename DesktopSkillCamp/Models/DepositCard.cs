@@ -11,7 +11,7 @@ namespace DesktopSkillCamp.Models
         public string CardIssuer { get; set; }
         public string CardNumber { get; set; }
         public DateTime CardExpDate { get; set; }
-        public int Balance { get; set; }
+        public double Balance { get; set; }
         public string CardHolder { get; set; }
         public int idCartType { get; set; }
         public virtual CardType CardType { get; set; }
