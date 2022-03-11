@@ -158,13 +158,19 @@ namespace DesktopSkillCamp.Forms
                                 };
                                 var response5 = await http.PostAsync("http://localhost:60424/api/stations/purchase", purchase, new JsonMediaTypeFormatter());
                                 response5.EnsureSuccessStatusCode();
+                                var response = await http.GetAsync($"http://localhost:60424/api/stations/getDepositBalance?loal={tbName.Text}");
+                                response.EnsureSuccessStatusCode();
+                                var result = response.Content.ReadAsAsync<Models.DepositCard>();
+                                result.Result.Balance += price * 0.03;
+                                var response2 = await http.PostAsync("http://localhost:60424/api/stations/getDepositBalanceModify", result.Result, new JsonMediaTypeFormatter());
+                                response2.EnsureSuccessStatusCode();
                             }
-
                             break;
                         }
                     default:
                         break;
                 }
+                MessageBox.Show("Оплата успешно пройдена, можно начать заправку");
             }
         }
 
@@ -180,13 +186,17 @@ namespace DesktopSkillCamp.Forms
             {
                 spC.Visibility = Visibility.Visible;
                 spPrice.Visibility = Visibility.Collapsed;
-
             }
             else if (cbMode.SelectedIndex == 1)
             {
                 spPrice.Visibility = Visibility.Visible;
                 spC.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void clZapravit(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

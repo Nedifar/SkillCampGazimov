@@ -52,6 +52,8 @@
             </StackPanel>
             <StackPanel/>
             <Button Content="Начать работу" Click="clBegin"/>
+            <Button Content="Подача топлива" Click="clZapravit" Margin="0 10"/>
+            <CheckBox Content="авто" IsChecked="True"/>
         </StackPanel>
     </Grid>
 </Window>
