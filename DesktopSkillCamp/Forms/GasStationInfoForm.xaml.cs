@@ -21,10 +21,12 @@ namespace DesktopSkillCamp.Forms
     /// </summary>
     public partial class GasStationInfoForm : Window
     {
+        int selectedId;
         Models.GasStation selectedGasStation = new Models.GasStation();
-        public GasStationInfoForm(Models.GasStation gasStation)
+        public GasStationInfoForm(Models.GasStation gasStation, int id)
         {
             InitializeComponent();
+            selectedId = id;
             if(gasStation !=null)
             {
                 selectedGasStation = gasStation;
@@ -106,8 +108,10 @@ namespace DesktopSkillCamp.Forms
                     selectedGasStation.CarFillingStations.Add(new Models.CarFillingStation { Name = "Disel Fuel", AmountOfFuel = int.Parse(ostalosDT.Text), Price = float.Parse(priceDT.Text) });
                 }
             }
-            if (selectedGasStation.idStation != 0)
+            if (selectedGasStation.idStation == 0)
             {
+                selectedGasStation.idStation = selectedId;
+            }
                 using(var http = new HttpClient())
                 {
                     var response = await http.PostAsync("http://localhost:60424/api/stations", selectedGasStation, new JsonMediaTypeFormatter());
@@ -115,7 +119,7 @@ namespace DesktopSkillCamp.Forms
                     MessageBox.Show("Сохранено успешно");
                     Close();
                 }
-            }
+            
         }
     }
 }

@@ -159,11 +159,11 @@ namespace DesktopSkillCamp.Forms
                                 };
                                 var response5 = await http.PostAsync("http://localhost:60424/api/stations/purchase", purchase, new JsonMediaTypeFormatter());
                                 response5.EnsureSuccessStatusCode();
-                                var response = await http.GetAsync($"http://localhost:60424/api/stations/getDepositBalance?loal={tbName.Text}");
+                                var response = await http.GetAsync($"http://localhost:60424/api/stations/getLoaylityBalance/{tbName.Text}");
                                 response.EnsureSuccessStatusCode();
-                                var result = response.Content.ReadAsAsync<Models.DepositCard>();
+                                var result = response.Content.ReadAsAsync<Models.LoyaltyCard>();
                                 result.Result.Balance += price * 0.03;
-                                var response2 = await http.PostAsync("http://localhost:60424/api/stations/getDepositBalanceModify", result.Result, new JsonMediaTypeFormatter());
+                                var response2 = await http.PostAsync("http://localhost:60424/api/stations/getLoaylityBalanceModify", result.Result, new JsonMediaTypeFormatter());
                                 response2.EnsureSuccessStatusCode();
                             }
                             break;
@@ -205,7 +205,7 @@ namespace DesktopSkillCamp.Forms
                     {
                         progress.Value = i;
                     }));
-                    Thread.Sleep(200);
+                    Thread.Sleep(100);
                 }
             });
             MessageBox.Show("Заправка завершена.");

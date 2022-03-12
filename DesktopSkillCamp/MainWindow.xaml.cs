@@ -36,7 +36,7 @@ namespace DesktopSkillCamp
                     var response = await http.GetAsync($"http://localhost:60424/api/stations/getStationInfo?id={int.Parse(tbId.Text)}");
                     response.EnsureSuccessStatusCode();
                     var result = response.Content.ReadAsAsync<Models.GasStation>().Result;
-                    Forms.GasStationInfoForm gasStationInfoForm = new Forms.GasStationInfoForm(result);
+                    Forms.GasStationInfoForm gasStationInfoForm = new Forms.GasStationInfoForm(result, int.Parse(tbId.Text));
                     gasStationInfoForm.Show();
                 }
             else
