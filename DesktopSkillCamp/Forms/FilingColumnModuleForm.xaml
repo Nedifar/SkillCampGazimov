@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopSkillCamp.Forms"
         mc:Ignorable="d"
-        Title="FilingColumnModuleForm" Height="450" Width="800">
+        Title="Заправка" Height="450" Width="800" MinWidth="500" MinHeight="450">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock FontSize="20" x:Name="mainText"/>
@@ -52,7 +52,7 @@
             </StackPanel>
             <StackPanel/>
             <Button Content="Начать работу" Click="clBegin"/>
-            <Button Content="Подача топлива" Click="clZapravit" Margin="0 10"/>
+            <Button Content="Подача топлива" x:Name="btTop" IsEnabled="False" Click="clZapravit" Margin="0 10"/>
             <ProgressBar x:Name="progress"/>
             <CheckBox Content="авто" IsChecked="True"/>
         </StackPanel>

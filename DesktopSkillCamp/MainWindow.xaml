@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopSkillCamp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="АЗС" Height="450" Width="800" MinWidth="500" MinHeight="450">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="АЗС" TextAlignment="Center"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Id" Margin="0 0 5 0"/>
                 <TextBox x:Name="tbId" Width="140"/>
             </StackPanel>
             <Button Content="Загрузить данные" Click="clLoadData" Margin="0 5"/>
             <Button Content="Заправка" Click="clZapravka"/>
-            <Button Content="Терминал" Click="clCamera" Margin="0 5"/>
+            <Button Content="Камера" Click="clCamera" Margin="0 5"/>
         </StackPanel>
     </Grid>
 </Window>

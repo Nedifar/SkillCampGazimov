@@ -32,147 +32,157 @@ namespace DesktopSkillCamp.Forms
 
         private async void clBegin(object sender, RoutedEventArgs e)
         {
-            using (var http = new HttpClient())
+            try
             {
-                var response = await http.GetAsync($"http://localhost:60424/api/stations/getStationInfo?id={int.Parse(tbAZS.Text)}");
-                response.EnsureSuccessStatusCode();
-                gas = response.Content.ReadAsAsync<Models.GasStation>().Result;
-                cbViewT.ItemsSource = gas.CarFillingStations.ToList();
+
+                using (var http = new HttpClient())
+                {
+                    var response = await http.GetAsync($"http://localhost:60424/api/stations/getStationInfo?id={int.Parse(tbAZS.Text)}");
+                    response.EnsureSuccessStatusCode();
+                    gas = response.Content.ReadAsAsync<Models.GasStation>().Result;
+                    cbViewT.ItemsSource = gas.CarFillingStations.ToList();
+                }
             }
+            catch { MessageBox.Show("Выберите АЗС"); }
         }
 
         private async void clPayment(object sender, RoutedEventArgs e)
         {
-            using (var http = new HttpClient())
+            try
             {
-                switch (cbPayment.SelectedIndex)
+                using (var http = new HttpClient())
                 {
-                    case 0:
-                        {
-                            var response = await http.GetAsync($"http://localhost:60424/api/stations/getLoaylityBalance/{tbName.Text}");
-                            response.EnsureSuccessStatusCode();
-                            var result = response.Content.ReadAsAsync<Models.LoyaltyCard>();
-                            var carFillSel = cbViewT.SelectedItem as Models.CarFillingStation;
-                            if (cbMode.SelectedIndex == 0)
+                    switch (cbPayment.SelectedIndex)
+                    {
+                        case 0:
                             {
-                                if (double.Parse(tbLitr.Text) * carFillSel.Price < result.Result.Balance)
-                                {
-                                    MessageBox.Show("Оплата завершена");
-                                    result.Result.Balance -= double.Parse(tbLitr.Text) * carFillSel.Price;
-                                    var response1 = await http.PostAsync("http://localhost:60424/api/stations/getLoaylityBalanceModify", result.Result, new JsonMediaTypeFormatter());
-                                    response1.EnsureSuccessStatusCode();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Недостаточно средств");
-                                }
-                            }
-                            else if (cbMode.SelectedIndex == 1)
-                            {
-                                if (double.Parse(tbPrice.Text) < result.Result.Balance)
-                                {
-                                    MessageBox.Show("Оплата завершена");
-                                    result.Result.Balance -= double.Parse(tbPrice.Text);
-                                    var response2 = await http.PostAsync("http://localhost:60424/api/stations/getLoaylityBalanceModify", result.Result, new JsonMediaTypeFormatter());
-                                    response2.EnsureSuccessStatusCode();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Недостаточно средств");
-                                }
-                            }
-                            break;
-                        }
-                    case 1:
-                        {
-
-                            var response = await http.GetAsync($"http://localhost:60424/api/stations/getDepositBalance?loal={tbName.Text}");
-                            response.EnsureSuccessStatusCode();
-                            var result = response.Content.ReadAsAsync<Models.DepositCard>();
-                            var carFillSel = cbViewT.SelectedItem as Models.CarFillingStation;
-                            if (cbMode.SelectedIndex == 0)
-                            {
-                                if (double.Parse(tbLitr.Text) * carFillSel.Price < result.Result.Balance)
-                                {
-                                    MessageBox.Show("Оплата завершена");
-                                    result.Result.Balance -= double.Parse(tbLitr.Text) * carFillSel.Price;
-                                    var response1 = await http.PostAsync("http://localhost:60424/api/stations/getDepositBalanceModify", result.Result, new JsonMediaTypeFormatter());
-                                    response1.EnsureSuccessStatusCode();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Недостаточно средств");
-                                }
-                            }
-                            else if (cbMode.SelectedIndex == 1)
-                            {
-                                if (double.Parse(tbPrice.Text) < result.Result.Balance)
-                                {
-                                    MessageBox.Show("Оплата завершена");
-                                    result.Result.Balance -= double.Parse(tbPrice.Text);
-                                    var response2 = await http.PostAsync("http://localhost:60424/api/stations/getDepositBalanceModify", result.Result, new JsonMediaTypeFormatter());
-                                    response2.EnsureSuccessStatusCode();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Недостаточно средств");
-                                }
-                            }
-                            break;
-                        }
-                    case 2:
-                        {
-                            var carFillSel = cbViewT.SelectedItem as Models.CarFillingStation;
-                            double price = 0;
-                            if (cbMode.SelectedIndex == 0)
-                            {
-                                price = double.Parse(tbLitr.Text) * carFillSel.Price;
-                            }
-                            else if (cbMode.SelectedIndex == 1)
-                            {
-                                price = double.Parse(tbPrice.Text);
-                                tbLitr.Text = (price / carFillSel.Price).ToString();
-                            }
-                            Models.Pay pay = new Models.Pay
-                            {
-                                CardNumber = tbNumberCard.Text,
-                                CardHolder = tbPerson.Text,
-                                Code = "000",
-                                Price = price,
-                                OrganizationName = "Сбербанк",
-                                idStation = gas.idStation,
-                                key = Models.Session.sessionKey.ToString()
-                            };
-                            var response4 = await http.PostAsync("http://localhost:60424/api/stations/pay", pay, new JsonMediaTypeFormatter());
-                            response4.EnsureSuccessStatusCode();
-                            if (response4.Content.ReadAsStringAsync().Result.Contains("Одобрено"))
-                            {
-                                Models.Purchase purchase = new Models.Purchase
-                                {
-                                    CardHolder = tbPerson.Text,
-                                    PurchaseDate = DateTime.Now,
-                                    idStation = gas.idStation,
-                                    FuelType = carFillSel.Name,
-                                    Value = double.Parse(tbLitr.Text),
-                                    Cost = price,
-                                    PaymentType = cbMode.Text
-                                };
-                                var response5 = await http.PostAsync("http://localhost:60424/api/stations/purchase", purchase, new JsonMediaTypeFormatter());
-                                response5.EnsureSuccessStatusCode();
                                 var response = await http.GetAsync($"http://localhost:60424/api/stations/getLoaylityBalance/{tbName.Text}");
                                 response.EnsureSuccessStatusCode();
                                 var result = response.Content.ReadAsAsync<Models.LoyaltyCard>();
-                                result.Result.Balance += price * 0.03;
-                                var response2 = await http.PostAsync("http://localhost:60424/api/stations/getLoaylityBalanceModify", result.Result, new JsonMediaTypeFormatter());
-                                response2.EnsureSuccessStatusCode();
+                                var carFillSel = cbViewT.SelectedItem as Models.CarFillingStation;
+                                if (cbMode.SelectedIndex == 0)
+                                {
+                                    if (double.Parse(tbLitr.Text) * carFillSel.Price < result.Result.Balance)
+                                    {
+                                        MessageBox.Show("Оплата завершена");
+                                        result.Result.Balance -= double.Parse(tbLitr.Text) * carFillSel.Price;
+                                        var response1 = await http.PostAsync("http://localhost:60424/api/stations/getLoaylityBalanceModify", result.Result, new JsonMediaTypeFormatter());
+                                        response1.EnsureSuccessStatusCode();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Недостаточно средств");
+                                    }
+                                }
+                                else if (cbMode.SelectedIndex == 1)
+                                {
+                                    if (double.Parse(tbPrice.Text) < result.Result.Balance)
+                                    {
+                                        MessageBox.Show("Оплата завершена");
+                                        result.Result.Balance -= double.Parse(tbPrice.Text);
+                                        var response2 = await http.PostAsync("http://localhost:60424/api/stations/getLoaylityBalanceModify", result.Result, new JsonMediaTypeFormatter());
+                                        response2.EnsureSuccessStatusCode();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Недостаточно средств");
+                                    }
+                                }
+                                break;
                             }
+                        case 1:
+                            {
+
+                                var response = await http.GetAsync($"http://localhost:60424/api/stations/getDepositBalance?loal={tbName.Text}");
+                                response.EnsureSuccessStatusCode();
+                                var result = response.Content.ReadAsAsync<Models.DepositCard>();
+                                var carFillSel = cbViewT.SelectedItem as Models.CarFillingStation;
+                                if (cbMode.SelectedIndex == 0)
+                                {
+                                    if (double.Parse(tbLitr.Text) * carFillSel.Price < result.Result.Balance)
+                                    {
+                                        MessageBox.Show("Оплата завершена");
+                                        result.Result.Balance -= double.Parse(tbLitr.Text) * carFillSel.Price;
+                                        var response1 = await http.PostAsync("http://localhost:60424/api/stations/getDepositBalanceModify", result.Result, new JsonMediaTypeFormatter());
+                                        response1.EnsureSuccessStatusCode();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Недостаточно средств");
+                                    }
+                                }
+                                else if (cbMode.SelectedIndex == 1)
+                                {
+                                    if (double.Parse(tbPrice.Text) < result.Result.Balance)
+                                    {
+                                        MessageBox.Show("Оплата завершена");
+                                        result.Result.Balance -= double.Parse(tbPrice.Text);
+                                        var response2 = await http.PostAsync("http://localhost:60424/api/stations/getDepositBalanceModify", result.Result, new JsonMediaTypeFormatter());
+                                        response2.EnsureSuccessStatusCode();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Недостаточно средств");
+                                    }
+                                }
+                                break;
+                            }
+                        case 2:
+                            {
+                                var carFillSel = cbViewT.SelectedItem as Models.CarFillingStation;
+                                double price = 0;
+                                if (cbMode.SelectedIndex == 0)
+                                {
+                                    price = double.Parse(tbLitr.Text) * carFillSel.Price;
+                                }
+                                else if (cbMode.SelectedIndex == 1)
+                                {
+                                    price = double.Parse(tbPrice.Text);
+                                    tbLitr.Text = (price / carFillSel.Price).ToString();
+                                }
+                                Models.Pay pay = new Models.Pay
+                                {
+                                    CardNumber = tbNumberCard.Text,
+                                    CardHolder = tbPerson.Text,
+                                    Code = "000",
+                                    Price = price,
+                                    OrganizationName = "Сбербанк",
+                                    idStation = gas.idStation,
+                                    key = Models.Session.sessionKey.ToString()
+                                };
+                                var response4 = await http.PostAsync("http://localhost:60424/api/stations/pay", pay, new JsonMediaTypeFormatter());
+                                response4.EnsureSuccessStatusCode();
+                                if (response4.Content.ReadAsStringAsync().Result.Contains("Одобрено"))
+                                {
+                                    Models.Purchase purchase = new Models.Purchase
+                                    {
+                                        CardHolder = tbPerson.Text,
+                                        PurchaseDate = DateTime.Now,
+                                        idStation = gas.idStation,
+                                        FuelType = carFillSel.Name,
+                                        Value = double.Parse(tbLitr.Text),
+                                        Cost = price,
+                                        PaymentType = cbMode.Text
+                                    };
+                                    var response5 = await http.PostAsync("http://localhost:60424/api/stations/purchase", purchase, new JsonMediaTypeFormatter());
+                                    response5.EnsureSuccessStatusCode();
+                                    var response = await http.GetAsync($"http://localhost:60424/api/stations/getLoaylityBalance/{tbName.Text}");
+                                    response.EnsureSuccessStatusCode();
+                                    var result = response.Content.ReadAsAsync<Models.LoyaltyCard>();
+                                    result.Result.Balance += price * 0.03;
+                                    var response2 = await http.PostAsync("http://localhost:60424/api/stations/getLoaylityBalanceModify", result.Result, new JsonMediaTypeFormatter());
+                                    response2.EnsureSuccessStatusCode();
+                                }
+                                break;
+                            }
+                        default:
                             break;
-                        }
-                    default:
-                        break;
+                    }
+                    btTop.IsEnabled = false;
+                    MessageBox.Show("Оплата успешно пройдена, можно начать заправку");
                 }
-                MessageBox.Show("Оплата успешно пройдена, можно начать заправку");
             }
+            catch { MessageBox.Show("Проверьте корректность данных"); }
         }
 
         private void selChang(object sender, SelectionChangedEventArgs e)
@@ -197,6 +207,7 @@ namespace DesktopSkillCamp.Forms
 
         private async void clZapravit(object sender, RoutedEventArgs e)
         {
+            btTop.IsEnabled = true;
             await Task.Run(() =>
             {
                 for (int i = 1; i <= 100; i++)

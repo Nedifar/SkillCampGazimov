@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopSkillCamp.Forms"
         mc:Ignorable="d"
-        Title="CameraForm" Height="450" Width="800">
+        Title="Камера" Height="450" Width="800" MinWidth="500" MinHeight="450">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button Content="Номер не распознан"/>

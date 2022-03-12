@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopSkillCamp.Forms"
         mc:Ignorable="d"
-        Title="GasStationInfoForm" Height="450" Width="800">
+        Title="Информация о газовой станции" Height="450" Width="800" MinWidth="500" MinHeight="450">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock FontSize="20" x:Name="mainText"/>

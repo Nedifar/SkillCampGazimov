@@ -30,17 +30,21 @@ namespace DesktopSkillCamp
 
         private async void clLoadData(object sender, RoutedEventArgs e)
         {
-            if (int.Parse(tbId.Text) >= 1 && int.Parse(tbId.Text) <= 99)
-                using (var http = new HttpClient())
-                {
-                    var response = await http.GetAsync($"http://localhost:60424/api/stations/getStationInfo?id={int.Parse(tbId.Text)}");
-                    response.EnsureSuccessStatusCode();
-                    var result = response.Content.ReadAsAsync<Models.GasStation>().Result;
-                    Forms.GasStationInfoForm gasStationInfoForm = new Forms.GasStationInfoForm(result, int.Parse(tbId.Text));
-                    gasStationInfoForm.Show();
-                }
-            else
-                MessageBox.Show("Error");
+            try
+            {
+                if (int.Parse(tbId.Text) >= 1 && int.Parse(tbId.Text) <= 99)
+                    using (var http = new HttpClient())
+                    {
+                        var response = await http.GetAsync($"http://localhost:60424/api/stations/getStationInfo?id={int.Parse(tbId.Text)}");
+                        response.EnsureSuccessStatusCode();
+                        var result = response.Content.ReadAsAsync<Models.GasStation>().Result;
+                        Forms.GasStationInfoForm gasStationInfoForm = new Forms.GasStationInfoForm(result, int.Parse(tbId.Text));
+                        gasStationInfoForm.Show();
+                    }
+                else
+                    MessageBox.Show("Введите станцию от 1 до 99");
+            }
+            catch { MessageBox.Show("Введите корректные данные или проверьте соединение."); }
         }
 
         private void clZapravka(object sender, RoutedEventArgs e)
