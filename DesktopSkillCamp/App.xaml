@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:DesktopSkillCamp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Beige"/>
+        </Style>
     </Application.Resources>
 </Application>

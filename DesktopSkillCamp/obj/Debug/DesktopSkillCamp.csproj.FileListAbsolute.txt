@@ -24,3 +24,4 @@ C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\Forms\Ca
 C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\Forms\FilingColumnModuleForm.g.cs
 C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\Forms\CameraForm.baml
 C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\Forms\FilingColumnModuleForm.baml
+C:\Users\Guest\source\repos\DesktopSkillCamp\DesktopSkillCamp\obj\Debug\App.baml
