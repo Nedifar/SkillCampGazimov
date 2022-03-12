@@ -10,7 +10,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock FontSize="20" x:Name="mainText"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5">
-                <TextBlock Text="ID АЗС " Margin="0 0 5 0"/>
+                <TextBlock Text="ID Колонки " Margin="0 0 5 0"/>
                 <TextBox x:Name="tbAZS" Width="120"/>
             </StackPanel>
             <StackPanel x:Name="spZapravka">
